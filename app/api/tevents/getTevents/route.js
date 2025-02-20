@@ -4,11 +4,13 @@ import { TEvent } from "@/models/EventDetails";
 import { NextResponse } from "next/server";
 
 // tevents/getTevents/route.js
+export const dynamic = 'force-dynamic'; // Force dynamic rendering
+
 export async function GET(request) {
   try {
+    await connectToDatabase();
     const { searchParams } = new URL(request.url);
     const eventId = searchParams.get("eventId");
-    await connectToDatabase();
     let event;
     if (eventId) {
       event = await TEvent.findOne({ eventid: parseInt(eventId) });
@@ -28,7 +30,7 @@ export async function GET(request) {
       return NextResponse.json({ events: event }, { status: 200 });
     }
   } catch (error) {
-    console.error("Error in event fetch:", error);
+    console.error("API Error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

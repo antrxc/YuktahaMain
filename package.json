@@ -35,11 +35,11 @@
     "mongoose": "^8.9.7",
     "mongoose-sequence": "^6.0.1",
     "motion": "^12.4.3",
-    "next": "15.1.6",
+    "next": "^14.0.0",
     "next-themes": "^0.4.4",
-    "react": "^18.3.1",
+    "react": "^18.2.0",
     "react-countup": "^6.5.3",
-    "react-dom": "^18.3.1",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.2",
     "shadcn": "^2.3.0",
     "shadcn-ui": "^0.9.4",
@@ -47,7 +47,8 @@
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "ui": "github:shadcn/ui",
-    "zod": "^3.24.1"
+    "zod": "^3.24.1",
+    "@vercel/analytics": "^1.2.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

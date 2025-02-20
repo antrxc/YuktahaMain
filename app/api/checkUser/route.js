@@ -1,22 +1,27 @@
-import { connectDb } from "@/lib/mongodb";
-import UserDetails from "@/models/User";
+import { connectToDatabase } from "@/lib/mongodb";
+import UserDetails from "@/models/UserDetails";
+import { NextResponse } from "next/server";
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+export async function POST(request) {
   try {
-    const { email } = req.body;
+    const body = await request.json();
+    const { email } = body;
+    
     if (!email) {
-      return res.status(400).json({ error: "Email is required" });
+      return NextResponse.json(
+        { error: "Email is required" },
+        { status: 400 }
+      );
     }
 
-    await connectDb();
+    await connectToDatabase();
     const user = await UserDetails.findOne({ email });
 
-    res.status(200).json({ user: user || null });
+    return NextResponse.json({ user: user || null }, { status: 200 });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
